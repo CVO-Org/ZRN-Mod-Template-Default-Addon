@@ -1,0 +1,40 @@
+name: "Validate: Default Addon"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the default addon
+      uses: actions/checkout@v4
+      with:
+        path: default-addon
+    - name: Checkout the mod template
+      uses: actions/checkout@v4
+      with:
+        repository: OverlordZorn/ZRN-Mod-Template
+        path: mod
+    - name: Fill the mod template's placeholders
+      working-directory: mod
+      run: |
+        grep -rlI --exclude-dir=.git --exclude-dir=include -e '~MAINPREFIX~' -e '~PREFIX~' . \
+          | xargs sed -i 's/~MAINPREFIX~/z/g; s/~PREFIX~/tmpl/g'
+    - name: Create an addon from this repo
+      # Same script the mods use, pointed at this checkout instead of the published main branch
+      working-directory: mod
+      run: pwsh tools/new-addon.ps1 -Name default_addon -DisplayName "Default Addon" -Author "CI" -TemplateDir ../default-addon/addon
+    - name: Setup HEMTT
+      uses: arma-actions/hemtt@v1
+    - name: Validate HEMTT
+      working-directory: mod
+      run: hemtt check
+    - name: Validate Config
+      working-directory: mod
+      run: python tools/validate_config.py

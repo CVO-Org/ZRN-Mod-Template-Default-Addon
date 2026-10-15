@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="{{PREFIX}}">
+    <Package name="{{ADDON}}">
+        <Container name="CBA_Settings">
+            <Key ID="STR_{{PREFIX}}_{{ADDON}}_set_enable">
+                <English>Enable</English>
+            </Key>
+            <Key ID="STR_{{PREFIX}}_{{ADDON}}_set_enable_desc">
+                <English>Will Enable the {{ADDON}} System.</English>
+            </Key>
+        </Container>
+        <Container name="CBA_Settings_Categories">
+            <Key ID="STR_{{PREFIX}}_{{ADDON}}_set_cat_main">
+                <English>{{PREFIX}} - {{ADDON_BEAUTIFIED}}</English>
+            </Key>
+        </Container>
+    </Package>
+</Project>

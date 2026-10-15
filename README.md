@@ -6,10 +6,10 @@ Every mod downloads it from the `main` branch of this repository, so changes her
 
 ## Creating an addon
 
-Run this from the root of your mod:
+Double-click `tools\new-addon.bat` in your mod, or run it from a terminal in the mod's root (e.g. in VSCode):
 
-```powershell
-powershell -ExecutionPolicy Bypass -File tools\new-addon.ps1
+```
+tools\new-addon.bat
 ```
 
 The script asks for the addon name, the display name and the author, fills in the placeholders and creates `addons\<name>`. See the [mod template's README](https://github.com/OverlordZorn/ZRN-Mod-Template#per-new-addon) for its options.
@@ -40,8 +40,8 @@ The script stops if it finds any other `{{PLACEHOLDER}}`, so new ones need to be
 
 Try a change in a mod before merging it, using your local clone instead of the published version:
 
-```powershell
-powershell -ExecutionPolicy Bypass -File tools\new-addon.ps1 -TemplateDir ..\ZRN-Mod-Template-Default-Addon\addon
+```
+tools\new-addon.bat -TemplateDir ..\ZRN-Mod-Template-Default-Addon\addon
 ```
 
 `Validate: Default Addon` does the same on every push and PR: it creates an addon from this repository inside the mod template, then runs `hemtt check` and the config validation.
